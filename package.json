@@ -19,9 +19,12 @@
   },
   "scripts": {
     "node-engine-check": "npx check-engine",
+    "prettier": "prettier \"**/*.+(js|ts|json|css|)\"",
+    "prettier:format": "npm run prettier -- --write",
     "test": "npm run node-engine-check && echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "check-engine": "^1.10.0"
+    "check-engine": "^1.10.0",
+    "prettier": "^2.3.2"
   }
 }

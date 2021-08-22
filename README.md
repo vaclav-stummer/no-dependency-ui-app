@@ -7,4 +7,6 @@
 
 ## Scripts
 
-- `npm run node-engine-check` - checks the *node* & *npm* versions fur current terminal window 
+- `node-engine-check` - checks the *node* & *npm* versions fur current terminal window 
+- `prettier` - helper config command for `prettier:format`
+- `prettier:format` - formats code
