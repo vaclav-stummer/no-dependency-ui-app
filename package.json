@@ -1,0 +1,27 @@
+{
+  "name": "test-task",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaclav-stummer/vectary-test-task.git"
+  },
+  "author": "Vaclav Stummer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vaclav-stummer/vectary-test-task/issues"
+  },
+  "homepage": "https://github.com/vaclav-stummer/vectary-test-task#readme",
+  "engines": {
+    "node": "14.x.x",
+    "npm": "7.x.x"
+  },
+  "scripts": {
+    "node-engine-check": "npx check-engine",
+    "test": "npm run node-engine-check && echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "check-engine": "^1.10.0"
+  }
+}
