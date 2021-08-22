@@ -21,10 +21,12 @@
     "node-engine-check": "npx check-engine",
     "prettier": "prettier \"**/*.+(js|ts|json|css|)\"",
     "prettier:format": "npm run prettier -- --write",
+    "dev": "npm run node-engine-check && tsc",
     "test": "npm run node-engine-check && echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "check-engine": "^1.10.0",
+    "typescript": "^4.3.5",
     "prettier": "^2.3.2"
   }
 }
