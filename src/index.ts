@@ -1,5 +1,7 @@
 import { formData } from './forms'
 
+import './style.scss'
+
 console.info('App started.')
 
 const form = document.querySelector('form') as HTMLFormElement
