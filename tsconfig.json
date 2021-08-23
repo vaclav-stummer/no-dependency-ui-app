@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2020",
+    "module": "commonjs",      
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "alwaysStrict": true,
@@ -14,7 +15,8 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "checkJs": true,
-    "outDir": "./built"
+    "rootDir": "src",
+    "outDir": "./build"
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules"]
