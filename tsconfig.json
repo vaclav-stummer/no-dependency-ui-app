@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2020",
+    "target": "es6",
     "module": "commonjs",      
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -16,7 +16,7 @@
     "strictPropertyInitialization": true,
     "checkJs": true,
     "rootDir": "src",
-    "outDir": "./build"
+    "sourceMap": true
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules"]

@@ -2,4 +2,6 @@
 node_modules
 
 # Typescript
-/build
+
+# Webpack
+/public/bundle.js

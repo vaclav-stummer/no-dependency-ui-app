@@ -1,3 +1,13 @@
-const personSaysHi = (name: string) => `${name} says hi!`
+import { formData } from './forms'
 
-personSaysHi('John Do')
+console.info('App started.')
+
+const form = document.querySelector('form') as HTMLFormElement
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault()
+
+  const data = formData(form)
+
+  console.log(data)
+})

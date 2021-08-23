@@ -3,4 +3,6 @@
 package-lock.json
 
 # Typescript
-/build
+
+# Webpack
+/public/bundle.js

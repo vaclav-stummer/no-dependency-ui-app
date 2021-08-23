@@ -12,15 +12,15 @@
 - `prettier:format` - formats code
 - `lint` - linter check
 - `lint:fix` - fixes fixable linter issues
-- `dev` - starts local development with hot reloading
-- `build` - cleans previous build and builds new one
-- `start` - starts production build
+- `dev` - starts local development server (*webpack-dev-server*) with hot reloading in development mode
+- `build` - builds production build
 
 ## Development dependencies
 - `check-engine` - checks and validate `Node` and `npm` versions which are run with project
 - `eslint` - linting tool
-- `nodemon` - hold reloading of the app
 - `prettier` - formatting tool
-- `rimraf` - helper tool for file deletion
-- `ts-node` - TypeScript execution and REPL for node.js
+- `ts-loader` - loads Typescript into webpack
 - `typescript` - JavaScript extension for optional typing
+- `webpack` - bundler
+- `webpack-cli` - webpack cli for easier handling
+- `webpack-dev-server` - webpack server for local development
