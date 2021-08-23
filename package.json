@@ -23,6 +23,7 @@
     "prettier:format": "npm run prettier -- --write",
     "lint": "eslint ./ --ext .ts --max-warnings 0",
     "lint:fix": "eslint ./ --ext .ts --fix",
+    "type-check": "tsc --noEmit",
     "dev": "npm run node-engine-check && nodemon",
     "build": "npm run node-engine-check && rimraf ./build && tsc",
     "start": "npm run build && node build/index.js",
