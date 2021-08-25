@@ -5,7 +5,7 @@ export default class PageLayout extends HTMLElement {
     const shadow = this.attachShadow({ mode: 'open' })
 
     shadow.innerHTML = `
-      <div>${this.getAttribute('name')}
+      <div>
         <slot />
       </div>
     `

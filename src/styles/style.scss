@@ -1,13 +1,19 @@
 @import './index.scss';
 @import '../components/PageLayout/styles.scss';
 @import '../components/PageHeader/styles.scss';
+@import '../components/LeftSideMenu/styles.scss';
+@import '../components/PageContent/styles.scss';
+@import '../components/ContentItem/styles.scss';
 
 html,
 body {
-  color: $body-color;
   width: 100%;
   height: 100%;
   margin: 0px;
+  background-color: $color-base;
   padding: 0px;
   overflow-x: hidden;
+  color: $color-grey-dark;
+  font-family: $font-base;
+  font-size: 12px;
 }

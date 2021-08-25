@@ -1,4 +1,7 @@
 page-layout {
-  height: 20px;
-  color: blue;
+  background-color: $color-base;
+}
+
+.content-section {
+  display: flex;
 }
