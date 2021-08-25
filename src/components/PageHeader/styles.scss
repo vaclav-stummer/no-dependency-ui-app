@@ -1,0 +1,48 @@
+@mixin placeholder {
+  background-color: $grey;
+  border-radius: 32px;
+}
+
+@mixin placeholder-big {
+  @include placeholder();
+  height: 40px;
+  width: 150px;
+}
+
+@mixin placeholder-small {
+  @include placeholder();
+  height: 32px;
+  width: 32px;
+}
+
+.page-header-inner-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  border-bottom: 1px solid $grey;
+  padding: 0 30px;
+
+  .left-side {
+    .logo {
+      @include placeholder-big();
+    }
+  }
+
+  .right-side {
+    display: flex;
+    align-items: center;
+
+    :not(:last-child) {
+      margin-right: 20px;
+    }
+
+    .profile-image {
+      @include placeholder-small();
+    }
+
+    .menu {
+      @include placeholder-big();
+    }
+  }
+}
