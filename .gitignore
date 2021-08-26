@@ -1,7 +1,8 @@
 # General
 node_modules
+public/
 
 # Typescript
 
-# Webpack
-/public/bundle.js
+# VS Code
+.DS_Store

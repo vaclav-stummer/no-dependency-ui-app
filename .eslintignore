@@ -1,11 +1,11 @@
 # General
 node_modules
+public/
 
 # Typescript
 
 # Webpack
 webpack.config.js
-/public/bundle.js
 
 # Prettier
 prettier.config.js
