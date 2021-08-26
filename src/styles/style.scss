@@ -1,4 +1,10 @@
+/* General */
 @import './index.scss';
+
+/* Libraries */
+@import '../libraries/dragAndDrop/styles.scss';
+
+/* Components */
 @import '../components/PageLayout/styles.scss';
 @import '../components/PageHeader/styles.scss';
 @import '../components/LeftSideMenu/styles.scss';

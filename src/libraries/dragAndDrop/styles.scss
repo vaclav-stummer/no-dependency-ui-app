@@ -1,0 +1,16 @@
+.dnd-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.dnd-box {
+  border: 1px solid $color-grey-dark;
+  background-color: $color-grey;
+  padding: 10px;
+  cursor: move;
+}
+
+.dnd-box.dnd-over {
+  border: 3px dotted $color-grey-dark;
+}

@@ -1,8 +1,11 @@
+/* Libraries */
+import './libraries/dragAndDrop'
+
+/* Components */
 import PageLayout from './components/PageLayout'
 import PageHeader from './components/PageHeader'
 import PageContent from './components/PageContent'
 import LeftSideMenu from './components/LeftSideMenu'
-import ContentItem from './components/ContentItem'
 
 import './styles/style.scss'
 
@@ -13,4 +16,3 @@ PageLayout
 PageHeader
 PageContent
 LeftSideMenu
-ContentItem
