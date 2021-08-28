@@ -1,10 +1,10 @@
-.page-content-wrapper {
+.projects-wrapper {
   width: 100%;
   height: calc(100vh - 130px);
   padding: 30px 45px;
 }
 
-.page-content-inner-wrapper {
+.projects-inner-wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-row: auto;
@@ -14,7 +14,7 @@
 }
 
 /* Children */
-.content-item {
+.project-item {
   display: flex;
   background-color: $color-grey;
   border-radius: 10px;

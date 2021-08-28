@@ -1,6 +1,5 @@
-import { Folder } from '../../libraries/stateManager'
+import type { Folder } from '../../libraries/stateManager'
 
-// TODO: Consider generalization and reusability
 export const populateLeftSideMenu = (
   items: Folder[],
   templateElementString: string,
