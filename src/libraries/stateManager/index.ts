@@ -49,3 +49,7 @@ export enum StateKeys {
 export const initializeState = <T>(key: string, payload: T): void => {
   localStorage.setItem(key, JSON.stringify(payload))
 }
+
+export const getState = (state: string): State => {
+  return JSON.parse(state)
+}
