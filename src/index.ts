@@ -15,7 +15,11 @@ import {
   initializeState,
   StateKeys,
 } from './libraries/stateManager'
-import { populateLeftSideMenu } from './components/LeftSideMenu/utils'
+import {
+  populateLeftSideMenu,
+  pickFilter,
+  onClickChangeFilter,
+} from './components/LeftSideMenu/utils'
 import { populateProjects } from './components/Projects/utils'
 
 import './styles/style.scss'
@@ -23,11 +27,13 @@ import './styles/style.scss'
 const root = document?.getElementById('root')
 
 window.onload = function () {
-  initializeState(StateKeys.Folders, initialState)
+  initializeState(StateKeys.Folders, initialState.folders)
+  initializeState(StateKeys.Filters, initialState.filters)
 
   if (!root) return
 
   /* Load components to DOM */
+  // Don't addEventListeners here
   const content = document?.querySelector('.content-section')
 
   root?.insertAdjacentHTML('afterbegin', Header)
@@ -38,9 +44,16 @@ window.onload = function () {
   content?.insertAdjacentHTML('beforeend', Projects)
   populateProjects(initialState.folders[0].files, ProjectItem)
 
+  const menuItemList = document?.querySelectorAll('.left-side-menu-item')
+
+  pickFilter(menuItemList, initialState.filters)
+
   /* Libraries initialization */
   // Libraries needs to initialized after elements population
   dnd()
+
+  /* Event listeners initialization */
+  onClickChangeFilter(menuItemList)
 }
 
 console.info('App started.')

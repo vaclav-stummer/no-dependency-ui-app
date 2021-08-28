@@ -23,8 +23,9 @@
     padding: 0 15px;
     cursor: pointer;
 
-    .left-side-menu-item-label {
-      // TODO: TBD
-    }
+  }
+  
+  .active {
+    background-color: $color-grey;
   }
 }

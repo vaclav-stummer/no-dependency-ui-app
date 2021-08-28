@@ -1,3 +1,8 @@
+export enum StateKeys {
+  Folders = 'folders',
+  Filters = 'filters',
+}
+
 export type File = {
   name: string
 }
@@ -10,10 +15,11 @@ export type Folder = {
 
 interface State {
   folders: Folder[]
+  filters: string
 }
 
 export const initialState: State = {
-  folders: [
+  [StateKeys.Folders]: [
     {
       id: '0',
       name: 'Folder 1',
@@ -40,16 +46,9 @@ export const initialState: State = {
       files: [],
     },
   ],
-}
-
-export enum StateKeys {
-  Folders = 'folders',
+  [StateKeys.Filters]: 'left-side-menu-item-0',
 }
 
 export const initializeState = <T>(key: string, payload: T): void => {
   localStorage.setItem(key, JSON.stringify(payload))
-}
-
-export const getState = (state: string): State => {
-  return JSON.parse(state)
 }
