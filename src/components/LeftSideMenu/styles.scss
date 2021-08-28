@@ -12,7 +12,8 @@
     margin-bottom: 20px;
   }
 
-  .menu-item {
+  // TODO: Move to the related component
+  .left-side-menu-item {
     display: flex;
     align-items: center;
     width: 240px;
@@ -20,5 +21,10 @@
     border: 1px solid $color-grey;
     border-radius: 32px;
     padding: 0 15px;
+    cursor: pointer;
+
+    .left-side-menu-item-label {
+      // TODO: TBD
+    }
   }
 }
