@@ -6,12 +6,10 @@
 
 /* Components */
 @import '../components/PageLayout/styles.scss';
-@import '../components/LeftSideMenu/styles.scss';
-@import '../components/PageContent/styles.scss';
-@import '../components/ContentItem/styles.scss';
 
 @import '../components/Header/styles.scss';
 @import '../components/LeftSideMenu/styles.scss';
+@import '../components/Content/styles.scss';
 
 html,
 body {
