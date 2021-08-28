@@ -14,6 +14,7 @@ import {
   initialState,
   initializeState,
   StateKeys,
+  File,
 } from './libraries/stateManager'
 import {
   populateLeftSideMenu,
@@ -42,7 +43,17 @@ window.onload = function () {
   populateLeftSideMenu(initialState.folders, MenuItem)
 
   content?.insertAdjacentHTML('beforeend', Projects)
-  populateProjects(initialState.folders[0].files, ProjectItem)
+  const allStackedFiles = initialState.folders.reduce(
+    (stackedFiles, folder) => {
+      return [...stackedFiles, ...folder.files]
+    },
+    [] as File[],
+  )
+
+  populateProjects({
+    items: allStackedFiles,
+    templateElementString: ProjectItem,
+  })
 
   const menuItemList = document?.querySelectorAll('.left-side-menu-item')
 
@@ -53,7 +64,7 @@ window.onload = function () {
   dnd()
 
   /* Event listeners initialization */
-  onClickChangeFilter(menuItemList)
+  onClickChangeFilter(menuItemList, ProjectItem)
 }
 
 console.info('App started.')

@@ -2,7 +2,9 @@ import {
   initializeState,
   StateKeys,
   Folder,
+  File,
 } from '../../libraries/stateManager'
+import { populateProjects } from '../Projects/utils'
 
 export const populateLeftSideMenu = (
   items: Folder[],
@@ -31,11 +33,36 @@ export const pickFilter = (
   })
 }
 
-export const onClickChangeFilter = (menuItemList: NodeListOf<Element>): void => {
+export const onClickChangeFilter = (
+  menuItemList: NodeListOf<Element>,
+  projectItemElementString: string,
+): void => {
   menuItemList.forEach(function (menuItem) {
     menuItem.addEventListener('click', function () {
       initializeState(StateKeys.Filters, this.id)
       pickFilter(menuItemList, this.id)
+
+      const folders: Folder[] = JSON.parse(localStorage.folders)
+
+      if (this.id === 'left-side-menu-item-0') {
+        const allStackedFiles = folders.reduce((stackedFiles, folder) => {
+          return [...stackedFiles, ...folder.files]
+        }, [] as File[])
+
+        populateProjects({
+          items: allStackedFiles,
+          templateElementString: projectItemElementString,
+          shouldCleanup: true,
+        })
+      } else {
+        const folder = folders.find((folder) => this.id === folder.id)
+
+        populateProjects({
+          items: folder?.files || [],
+          templateElementString: projectItemElementString,
+          shouldCleanup: true,
+        })
+      }
     })
   })
 }

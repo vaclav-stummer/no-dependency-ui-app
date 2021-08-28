@@ -21,7 +21,7 @@ interface State {
 export const initialState: State = {
   [StateKeys.Folders]: [
     {
-      id: '0',
+      id: 'left-side-menu-item-1',
       name: 'Folder 1',
       files: [
         { name: '1' },
@@ -36,12 +36,12 @@ export const initialState: State = {
       ],
     },
     {
-      id: '1',
+      id: 'left-side-menu-item-2',
       name: 'Folder 2',
-      files: [],
+      files: [{ name: '10' }],
     },
     {
-      id: '2',
+      id: 'left-side-menu-item-3',
       name: 'Folder 3',
       files: [],
     },
