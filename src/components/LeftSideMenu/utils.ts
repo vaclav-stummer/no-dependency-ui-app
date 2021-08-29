@@ -1,7 +1,11 @@
 import MenuItem from '../LeftSideMenu/components/MenuItem/index.html'
 
 import { setState, StateKeys, Folder } from '../../libraries/stateManager'
-import { populateProjects, onClickProjectToggle } from '../Projects/utils'
+import {
+  populateProjects,
+  onClickProjectToggle,
+  unselectProject,
+} from '../Projects/utils'
 
 export const populateLeftSideMenu = (): void => {
   const folders: Folder[] = JSON.parse(localStorage.folders)
@@ -36,6 +40,7 @@ export const onClickChangeFilter = (): void => {
     menuItem.addEventListener('click', function () {
       setState(StateKeys.Filters, this.id)
       pickFilter(this.id)
+      unselectProject()
 
       const folders: Folder[] = JSON.parse(localStorage.folders)
 
