@@ -61,15 +61,12 @@ export const populateProjects = ({
   dnd()
 }
 
-export const unPopulateProjects = (): // templateElementString: string,
-void => {
+export const unPopulateProjects = (): void => {
   const projectsElement = document?.querySelector('.projects-inner-wrapper')
 
   if (!projectsElement) return
 
   projectsElement.innerHTML = ''
-
-  dnd()
 }
 
 export const onClickProjectToggle = (): void => {
