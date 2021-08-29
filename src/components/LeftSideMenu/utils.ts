@@ -2,7 +2,7 @@ import {
   initializeState,
   StateKeys,
   Folder,
-  File,
+  Project,
 } from '../../libraries/stateManager'
 import { populateProjects } from '../Projects/utils'
 
@@ -46,8 +46,8 @@ export const onClickChangeFilter = (
 
       if (this.id === 'left-side-menu-item-0') {
         const allStackedFiles = folders.reduce((stackedFiles, folder) => {
-          return [...stackedFiles, ...folder.files]
-        }, [] as File[])
+          return [...stackedFiles, ...folder.projects]
+        }, [] as Project[])
 
         populateProjects({
           items: allStackedFiles,
@@ -58,7 +58,7 @@ export const onClickChangeFilter = (
         const folder = folders.find((folder) => this.id === folder.id)
 
         populateProjects({
-          items: folder?.files || [],
+          items: folder?.projects || [],
           templateElementString: projectItemElementString,
           shouldCleanup: true,
         })

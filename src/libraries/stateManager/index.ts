@@ -3,18 +3,34 @@ export enum StateKeys {
   Filters = 'filters',
 }
 
-export type File = {
+type ItemBase = {
+  id: string
   name: string
 }
 
-export type Folder = {
-  id: string
-  name: string
-  files: File[]
+export type Project = ItemBase & {
+  selected: boolean
 }
+
+export type Folder = ItemBase & {
+  projects: Project[]
+}
+
+const initialProjects: Project[] = [
+  { id: 'project-1', name: '1', selected: false },
+  { id: 'project-2', name: '2', selected: false },
+  { id: 'project-3', name: '3', selected: false },
+  { id: 'project-4', name: '4', selected: false },
+  { id: 'project-5', name: '5', selected: false },
+  { id: 'project-6', name: '6', selected: false },
+  { id: 'project-7', name: '7', selected: false },
+  { id: 'project-8', name: '8', selected: false },
+  { id: 'project-9', name: '9', selected: false },
+]
 
 interface State {
   folders: Folder[]
+  // TODO: Nice to have rename to "selectedFilter"
   filters: string
 }
 
@@ -23,32 +39,23 @@ export const initialState: State = {
     {
       id: 'left-side-menu-item-1',
       name: 'Folder 1',
-      files: [
-        { name: '1' },
-        { name: '2' },
-        { name: '3' },
-        { name: '4' },
-        { name: '5' },
-        { name: '6' },
-        { name: '7' },
-        { name: '8' },
-        { name: '9' },
-      ],
+      projects: initialProjects,
     },
     {
       id: 'left-side-menu-item-2',
       name: 'Folder 2',
-      files: [{ name: '10' }],
+      projects: [{ id: 'project-10', name: '10', selected: false }],
     },
     {
       id: 'left-side-menu-item-3',
       name: 'Folder 3',
-      files: [],
+      projects: [],
     },
   ],
   [StateKeys.Filters]: 'left-side-menu-item-0',
 }
 
+// TODO: Rename to "setState"
 export const initializeState = <T>(key: string, payload: T): void => {
   localStorage.setItem(key, JSON.stringify(payload))
 }

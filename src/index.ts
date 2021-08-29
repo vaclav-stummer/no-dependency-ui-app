@@ -7,21 +7,24 @@ import Header from './components/Header/index.html'
 import LeftSideMenu from './components/LeftSideMenu/index.html'
 import MenuItem from './components/LeftSideMenu/components/MenuItem.html'
 import Projects from './components/Projects/index.html'
-import ProjectItem from './components/Projects/components/ProjectItem.html'
+import ProjectItem from './components/Projects/components/ProjectItem/index.html'
 
 /* Utils */
 import {
   initialState,
   initializeState,
   StateKeys,
-  File,
+  Project,
 } from './libraries/stateManager'
 import {
   populateLeftSideMenu,
   pickFilter,
   onClickChangeFilter,
 } from './components/LeftSideMenu/utils'
-import { populateProjects } from './components/Projects/utils'
+import {
+  populateProjects,
+  onClickProjectToggle,
+} from './components/Projects/utils'
 
 import './styles/style.scss'
 
@@ -45,9 +48,9 @@ window.onload = function () {
   content?.insertAdjacentHTML('beforeend', Projects)
   const allStackedFiles = initialState.folders.reduce(
     (stackedFiles, folder) => {
-      return [...stackedFiles, ...folder.files]
+      return [...stackedFiles, ...folder.projects]
     },
-    [] as File[],
+    [] as Project[],
   )
 
   populateProjects({
@@ -65,6 +68,13 @@ window.onload = function () {
 
   /* Event listeners initialization */
   onClickChangeFilter(menuItemList, ProjectItem)
+
+  // const projectList = document?.querySelectorAll('.project-item-wrapper')
+
+  // TODO: Re-initialize after menu switch
+  onClickProjectToggle()
 }
+
+console.log('getState', localStorage.filters)
 
 console.info('App started.')

@@ -47,6 +47,7 @@ export const dnd = (): void => {
   }
 
   const items = document.querySelectorAll('.dnd-container .dnd-box')
+
   items.forEach(function (item) {
     item.addEventListener('dragstart', handleDragStart, false)
     item.addEventListener('dragend', handleDragEnd, false)

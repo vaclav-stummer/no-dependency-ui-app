@@ -1,0 +1,39 @@
+/* Children */
+.project-item-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 170px;
+  background-color: $color-grey;
+  border: 1px solid $color-grey;
+  border-radius: 10px;
+  cursor: move;
+
+  .project-item-checkbox {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid $color-grey-dark;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .selected {
+    background-color: $color-grey-dark;
+  }
+
+  .name {
+    font-size: 40px;
+    line-height: 54px;
+  }
+}
+
+.selected {
+  border: 1px solid $color-purple;
+}

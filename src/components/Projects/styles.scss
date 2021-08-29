@@ -1,7 +1,7 @@
 .projects-wrapper {
   width: 100%;
   height: calc(100vh - 130px);
-  padding: 30px 45px;
+  padding: 30px;
 }
 
 .projects-inner-wrapper {
@@ -10,13 +10,4 @@
   grid-row: auto;
   grid-gap: 15px;
   width: 100%;
-  height: calc(100vh - 130px);
-}
-
-/* Children */
-.project-item {
-  display: flex;
-  background-color: $color-grey;
-  border-radius: 10px;
-  cursor: move;
 }
