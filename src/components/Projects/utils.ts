@@ -6,7 +6,28 @@ import {
   StateKeys,
 } from '../../libraries/stateManager'
 
-import  ProjectItem  from '../Projects/components/ProjectItem/index.html'
+import ProjectItem from '../Projects/components/ProjectItem/index.html'
+
+interface GetProjectsParams {
+  isAll: boolean
+  folders: Folder[]
+  filter: string
+}
+
+const getProjects = ({ isAll, folders, filter }: GetProjectsParams) => {
+  if (isAll) {
+    return [
+      ...folders.reduce((stackedFiles, folder) => {
+        return [...stackedFiles, ...folder.projects]
+      }, [] as Project[]),
+    ]
+  } else {
+    const folders: Folder[] = JSON.parse(localStorage.folders)
+    const relatedFolder = folders.find((folder) => folder.id === filter)
+
+    return relatedFolder ? relatedFolder.projects : []
+  }
+}
 
 interface PopulateProjectParams {
   folders: Folder[]
@@ -21,21 +42,18 @@ export const populateProjects = ({
     unPopulateProjects()
   }
 
-  const allStackedProjects = folders.reduce((stackedFiles, folder) => {
-    return [...stackedFiles, ...folder.projects]
-  }, [] as Project[])
+  const filter = JSON.parse(localStorage.filters)
+  const isAllSelected = filter === 'left-side-menu-item-all'
+  const projects = getProjects({ isAll: isAllSelected, folders, filter })
 
-  for (let i = 0; i < allStackedProjects.length; i++) {
+  for (let i = 0; i < projects.length; i++) {
     const projectsElement = document?.querySelector('.projects-inner-wrapper')
 
     const ProjectItemWithContent = ProjectItem
       // TODO: [Nice to have] Abstraction candidate => make util function
-      .replace('{{id}}', `project-${i + 1}`)
-      .replace('{{name}}', `${i + 1}`)
-      .replaceAll(
-        '{{selected}}',
-        `${allStackedProjects[i].selected ? 'selected' : ''}`,
-      )
+      .replace('{{id}}', `${projects[i].id}`)
+      .replace('{{name}}', `${projects[i].name}`)
+      .replaceAll('{{selected}}', `${projects[i].selected ? 'selected' : ''}`)
 
     projectsElement?.insertAdjacentHTML('beforeend', ProjectItemWithContent)
   }
