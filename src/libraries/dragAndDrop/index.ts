@@ -5,18 +5,15 @@ export const dnd = (): void => {
   let dragSrcEl: HTMLElement | null = null
 
   function handleDragStart(event: any) {
-    this.style.opacity = '0.1'
-
     dragSrcEl = this
 
+    event.dataTransfer.effectAllowed = 'move'
     event.dataTransfer.setData('text/html', this.innerHTML)
   }
 
   function handleDragEnd() {
-    this.style.opacity = '1'
-
     items.forEach(function (item) {
-      item.classList.remove('dnd-over')
+      item.classList.remove()
     })
   }
 
@@ -29,11 +26,11 @@ export const dnd = (): void => {
   }
 
   function handleDragEnter() {
-    this.classList.add('dnd-over')
+    this.classList.add()
   }
 
   function handleDragLeave() {
-    this.classList.remove('dnd-over')
+    this.classList.remove()
   }
 
   function handleDrop(event: any) {
@@ -66,4 +63,52 @@ export const dnd = (): void => {
     item.addEventListener('dragleave', handleDragLeave, false)
     item.addEventListener('drop', handleDrop, false)
   })
+
+  const allDraggableElements = document.querySelectorAll('.dnd-box')
+
+  /* Customer dragged element */
+
+  /* Create */
+  allDraggableElements.forEach(function (item) {
+    item?.addEventListener(
+      'dragstart',
+      function (event: any) {
+        const ghostElement = document?.createElement('div')
+        ghostElement.classList.add('drag-ghost')
+        ghostElement.style.position = 'absolute'
+        ghostElement.style.top = '-1000px'
+
+        // TODO: [Nice to have] Add mirror elements dynamically up to 5
+        const mirrorElement = document.createElement('div')
+        mirrorElement.classList.add('drag-ghost-mirror')
+        ghostElement.appendChild(mirrorElement)
+
+        const counter = document.createElement('div')
+        counter.classList.add('drag-ghost-counter')
+        const selectedElementsCount =
+          // TODO: Fix doubled ".selected" class
+          document.querySelectorAll('.selected').length / 2
+        counter.innerHTML = `${selectedElementsCount}`
+        ghostElement.append(counter)
+
+        document.body.appendChild(ghostElement)
+
+        event.dataTransfer.setDragImage(ghostElement, 0, 0)
+      },
+      false,
+    )
+  })
+
+  /* Remove */
+  document.addEventListener(
+    'dragend',
+    function () {
+      const ghost = document.querySelector('.drag-ghost')
+
+      if (ghost?.parentNode) {
+        ghost.parentNode.removeChild(ghost)
+      }
+    },
+    false,
+  )
 }

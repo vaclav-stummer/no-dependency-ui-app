@@ -1,3 +1,11 @@
+@mixin drag-ghost {
+  width: 160px;
+  height: 100px;
+  background-color: $color-grey-ghost;
+  border: 0.6px solid $color-purple;
+  border-radius: 5px;
+}
+
 .dnd-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -5,11 +13,31 @@
 }
 
 .dnd-box {
-  background-color: $color-grey;
-  padding: 10px;
   cursor: move;
 }
 
-.dnd-box.dnd-over {
-  border: 3px dotted $color-grey-dark;
+.drag-ghost {
+  position: relative;
+  @include drag-ghost();
+}
+
+.drag-ghost-mirror {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  @include drag-ghost();
+}
+
+.drag-ghost-counter {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: $color-base;
+  background-color: $color-purple;
+  text-align: center;
+  font-size: 12px;
+  line-height: 30px;
 }
