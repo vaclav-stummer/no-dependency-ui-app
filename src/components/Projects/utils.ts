@@ -132,3 +132,101 @@ export const onClickProjectToggle = (): void => {
     })
   })
 }
+
+interface UpdateFoldersParams {
+  folders: Folder[]
+  currentFolderId: string
+  targetedFolderId: string
+  selectedProjects: Project[]
+}
+
+const updateFolders = ({
+  folders,
+  currentFolderId,
+  targetedFolderId,
+  selectedProjects,
+}: UpdateFoldersParams) => {
+  const selectedProjectsIds = selectedProjects.map(
+    (selectedProject) => selectedProject?.id,
+  )
+
+  return folders.map((folder: Folder) => {
+    /* If projects are moved to the same folder */
+    if (currentFolderId === targetedFolderId) {
+      return folder
+    }
+
+    const projectIds = folder.projects.map((project) => project.id)
+    const hasSomeIdToRemove = selectedProjectsIds.some((id) =>
+      projectIds.includes(id),
+    )
+
+    /* If projects needs to be removed from current folder */
+    if (hasSomeIdToRemove) {
+      return {
+        ...folder,
+        projects: folder.projects.filter(
+          (project) => !selectedProjectsIds.includes(project.id),
+        ),
+      }
+    }
+
+    /* If projects needs to be added to new folder */
+    if (folder.id === targetedFolderId) {
+      const resetProjects = selectedProjects.map((project) => ({
+        ...project,
+        selected: false,
+      }))
+
+      return {
+        ...folder,
+        projects: [...folder.projects, ...resetProjects],
+      }
+    }
+
+    return folder
+  })
+}
+
+export const handleDragAndToFolder = (targetedFolderId: string): void => {
+  const selectedElement = document?.querySelectorAll(
+    '.project-item-wrapper .selected',
+  )
+  const selectedIds = Array.from(selectedElement).map((item) =>
+    item.id.replace('checkbox-', ''),
+  )
+
+  const folders: Folder[] = JSON.parse(localStorage.folders) || []
+
+  const selectedProjects = selectedIds.map((selectedId) => {
+    let relatedProject: Project | null = null
+
+    folders.forEach((folder) => {
+      folder.projects.forEach((project) => {
+        if (project.id === selectedId) {
+          relatedProject = project
+        }
+      })
+    })
+
+    return relatedProject as unknown as Project
+  })
+
+  const currentFolderId = JSON.parse(localStorage.filters)
+
+  const updatedFolders = updateFolders({
+    folders,
+    currentFolderId,
+    targetedFolderId,
+    selectedProjects,
+  })
+
+  setState(StateKeys.Folders, updatedFolders)
+  populateProjects({
+    folders: updatedFolders,
+    options: {
+      shouldCleanup: true,
+      shouldReinitialize: true,
+    },
+  })
+}
