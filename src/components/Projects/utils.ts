@@ -163,11 +163,19 @@ const updateFolders = ({
 
     /* If projects needs to be removed from current folder */
     if (hasSomeIdToRemove) {
+      const isAllFilter = currentFolderId === 'left-side-menu-item-all'
+
       return {
         ...folder,
-        projects: folder.projects.filter(
-          (project) => !selectedProjectsIds.includes(project.id),
-        ),
+        projects: folder.projects.filter((project) => {
+          const isSameFolder = folder.id === targetedFolderId
+
+          if (isAllFilter && isSameFolder) {
+            return true
+          } else {
+            return !selectedProjectsIds.includes(project.id)
+          }
+        }),
       }
     }
 
