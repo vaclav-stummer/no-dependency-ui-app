@@ -46,8 +46,7 @@ window.onload = function () {
 
   populateProjects({
     folders: foldersData,
-    shouldCleanup: true,
-    shouldReinitialize: false,
+    options: { shouldCleanup: true, shouldReinitialize: false },
   })
 
   /* Libraries initialization */

@@ -42,7 +42,9 @@ export const onClickChangeFilter = (): void => {
       if (this.id === 'left-side-menu-item-all') {
         populateProjects({
           folders,
-          shouldCleanup: true,
+          options: {
+            shouldCleanup: true,
+          },
         })
         onClickProjectToggle()
       } else {
@@ -50,7 +52,7 @@ export const onClickChangeFilter = (): void => {
 
         populateProjects({
           folders: folder ? [folder] : [],
-          shouldCleanup: true,
+          options: { shouldCleanup: true },
         })
         onClickProjectToggle()
       }

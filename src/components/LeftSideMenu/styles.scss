@@ -11,4 +11,10 @@
   :not(:last-child) {
     margin-bottom: 20px;
   }
+
+  :hover {
+    background-color: $color-purple;
+    color: $color-base;
+    border-right: 1px solid $color-purple;
+  }
 }

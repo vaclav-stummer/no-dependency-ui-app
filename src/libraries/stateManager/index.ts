@@ -14,6 +14,7 @@ export type Project = ItemBase & {
 
 export type Folder = ItemBase & {
   projects: Project[]
+  sortedProjectsIds: ItemBase['id'][]
 }
 
 const initialProjects: Project[] = [
@@ -28,6 +29,8 @@ const initialProjects: Project[] = [
   { id: 'project-9', name: '9', selected: false },
 ]
 
+const initialSortedProjectsIds = initialProjects.map(({ id }) => id)
+
 interface State {
   folders: Folder[]
   // TODO: [Nice to have] rename to "selectedFilter"
@@ -40,16 +43,19 @@ const initialState: State = {
       id: 'left-side-menu-item-1',
       name: 'Folder 1',
       projects: initialProjects,
+      sortedProjectsIds: initialSortedProjectsIds,
     },
     {
       id: 'left-side-menu-item-2',
       name: 'Folder 2',
       projects: [{ id: 'project-10', name: '10', selected: false }],
+      sortedProjectsIds: ['project-10'],
     },
     {
       id: 'left-side-menu-item-3',
       name: 'Folder 3',
       projects: [],
+      sortedProjectsIds: [],
     },
   ],
   [StateKeys.Filters]: 'left-side-menu-item-all',

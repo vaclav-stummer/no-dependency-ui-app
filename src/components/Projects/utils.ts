@@ -31,14 +31,15 @@ const getProjects = ({ isAll, folders, filter }: GetProjectsParams) => {
 
 interface PopulateProjectParams {
   folders: Folder[]
-  shouldCleanup?: boolean
-  shouldReinitialize?: boolean
+  options: {
+    shouldCleanup?: boolean
+    shouldReinitialize?: boolean
+  }
 }
 
 export const populateProjects = ({
   folders,
-  shouldCleanup = true,
-  shouldReinitialize = true,
+  options: { shouldCleanup = true, shouldReinitialize = true },
 }: PopulateProjectParams): void => {
   if (shouldCleanup) {
     unPopulateProjects()

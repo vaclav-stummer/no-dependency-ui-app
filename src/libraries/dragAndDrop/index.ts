@@ -36,7 +36,7 @@ export const dnd = (): void => {
   }
 
   function handleDrop(event: any) {
-    event.stopPropagation() // stops the browser from redirecting.
+    event.stopPropagation()
 
     if (dragSrcEl && dragSrcEl !== this) {
       dragSrcEl.innerHTML = this.innerHTML
