@@ -26,8 +26,10 @@ export const populateProjects = ({
     const projectsElement = document?.querySelector('.projects-inner-wrapper')
 
     const ProjectItemWithContent = templateElementString
+      // TODO: [Nice to have] Abstraction candidate => make util function
       .replace('{{id}}', `project-${i + 1}`)
       .replace('{{name}}', `${i + 1}`)
+      .replaceAll('{{selected}}', `${items[i].selected ? 'selected' : ''}`)
 
     projectsElement?.insertAdjacentHTML('beforeend', ProjectItemWithContent)
   }

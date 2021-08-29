@@ -10,12 +10,7 @@ import Projects from './components/Projects/index.html'
 import ProjectItem from './components/Projects/components/ProjectItem/index.html'
 
 /* Utils */
-import {
-  initialState,
-  setState,
-  StateKeys,
-  Project,
-} from './libraries/stateManager'
+import { initializeState, Project, Folder } from './libraries/stateManager'
 import {
   populateLeftSideMenu,
   pickFilter,
@@ -31,10 +26,9 @@ import './styles/style.scss'
 const root = document?.getElementById('root')
 
 window.onload = function () {
-  setState(StateKeys.Folders, initialState.folders)
-  setState(StateKeys.Filters, initialState.filters)
-
   if (!root) return
+
+  initializeState()
 
   /* Load components to DOM */
   // Don't addEventListeners here
@@ -42,26 +36,27 @@ window.onload = function () {
 
   root?.insertAdjacentHTML('afterbegin', Header)
 
+  const filtersData: string = JSON.parse(localStorage.filters)
+  const foldersData: Folder[] = JSON.parse(localStorage.folders)
+
   content?.insertAdjacentHTML('beforeend', LeftSideMenu)
-  populateLeftSideMenu(initialState.folders, MenuItem)
+  populateLeftSideMenu(foldersData, MenuItem)
 
   content?.insertAdjacentHTML('beforeend', Projects)
+
+  const menuItemList = document?.querySelectorAll('.left-side-menu-item')
+
+  pickFilter(menuItemList, filtersData)
+
   // TODO: Move "allStackedFiles" within "populateProjects"
-  const allStackedFiles = initialState.folders.reduce(
-    (stackedFiles, folder) => {
-      return [...stackedFiles, ...folder.projects]
-    },
-    [] as Project[],
-  )
+  const allStackedFiles = foldersData.reduce((stackedFiles, folder) => {
+    return [...stackedFiles, ...folder.projects]
+  }, [] as Project[])
 
   populateProjects({
     items: allStackedFiles,
     templateElementString: ProjectItem,
   })
-
-  const menuItemList = document?.querySelectorAll('.left-side-menu-item')
-
-  pickFilter(menuItemList, initialState.filters)
 
   /* Libraries initialization */
   // Libraries needs to initialized after elements population

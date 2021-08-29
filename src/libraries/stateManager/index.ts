@@ -34,7 +34,7 @@ interface State {
   filters: string
 }
 
-export const initialState: State = {
+const initialState: State = {
   [StateKeys.Folders]: [
     {
       id: 'left-side-menu-item-1',
@@ -57,4 +57,10 @@ export const initialState: State = {
 
 export const setState = <T>(key: string, payload: T): void => {
   localStorage.setItem(key, JSON.stringify(payload))
+}
+
+export const initializeState = (): void => {
+  if (!localStorage.filters) setState(StateKeys.Filters, initialState.filters)
+
+  if (!localStorage.folders) setState(StateKeys.Folders, initialState.folders)
 }
