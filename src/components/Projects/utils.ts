@@ -1,7 +1,7 @@
 import { dnd } from '../../libraries/dragAndDrop'
 
 import {
-  initializeState,
+  setState,
   Project,
   Folder,
   StateKeys,
@@ -77,7 +77,7 @@ export const onClickProjectToggle = (): void => {
         return folder
       })
 
-      initializeState(StateKeys.Folders, updatedFoldersState)
+      setState(StateKeys.Folders, updatedFoldersState)
 
       let isToggled = false
 

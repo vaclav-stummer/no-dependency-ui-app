@@ -1,0 +1,15 @@
+.left-side-menu-item {
+    display: flex;
+    align-items: center;
+    width: 240px;
+    height: 30px;
+    border: 1px solid $color-grey;
+    border-radius: 32px;
+    padding: 0 15px;
+    cursor: pointer;
+
+  }
+  
+  .active {
+    background-color: $color-grey;
+  }

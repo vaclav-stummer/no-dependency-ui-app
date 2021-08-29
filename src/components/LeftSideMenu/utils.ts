@@ -1,5 +1,5 @@
 import {
-  initializeState,
+  setState,
   StateKeys,
   Folder,
   Project,
@@ -39,12 +39,12 @@ export const onClickChangeFilter = (
 ): void => {
   menuItemList.forEach(function (menuItem) {
     menuItem.addEventListener('click', function () {
-      initializeState(StateKeys.Filters, this.id)
+      setState(StateKeys.Filters, this.id)
       pickFilter(menuItemList, this.id)
 
       const folders: Folder[] = JSON.parse(localStorage.folders)
 
-      if (this.id === 'left-side-menu-item-0') {
+      if (this.id === 'left-side-menu-item-all') {
         const allStackedFiles = folders.reduce((stackedFiles, folder) => {
           return [...stackedFiles, ...folder.projects]
         }, [] as Project[])

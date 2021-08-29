@@ -30,7 +30,7 @@ const initialProjects: Project[] = [
 
 interface State {
   folders: Folder[]
-  // TODO: Nice to have rename to "selectedFilter"
+  // TODO: [Nice to have] rename to "selectedFilter"
   filters: string
 }
 
@@ -52,10 +52,9 @@ export const initialState: State = {
       projects: [],
     },
   ],
-  [StateKeys.Filters]: 'left-side-menu-item-0',
+  [StateKeys.Filters]: 'left-side-menu-item-all',
 }
 
-// TODO: Rename to "setState"
-export const initializeState = <T>(key: string, payload: T): void => {
+export const setState = <T>(key: string, payload: T): void => {
   localStorage.setItem(key, JSON.stringify(payload))
 }

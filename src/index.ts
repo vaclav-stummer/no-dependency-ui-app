@@ -2,17 +2,17 @@
 import { dnd } from './libraries/dragAndDrop'
 
 /* Components */
-// TODO: Nice to have find out how to click trough to the exact .html file
+// TODO: [Nice to have] find out how to click trough to the exact .html file
 import Header from './components/Header/index.html'
 import LeftSideMenu from './components/LeftSideMenu/index.html'
-import MenuItem from './components/LeftSideMenu/components/MenuItem.html'
+import MenuItem from './components/LeftSideMenu/components/MenuItem/index.html'
 import Projects from './components/Projects/index.html'
 import ProjectItem from './components/Projects/components/ProjectItem/index.html'
 
 /* Utils */
 import {
   initialState,
-  initializeState,
+  setState,
   StateKeys,
   Project,
 } from './libraries/stateManager'
@@ -31,8 +31,8 @@ import './styles/style.scss'
 const root = document?.getElementById('root')
 
 window.onload = function () {
-  initializeState(StateKeys.Folders, initialState.folders)
-  initializeState(StateKeys.Filters, initialState.filters)
+  setState(StateKeys.Folders, initialState.folders)
+  setState(StateKeys.Filters, initialState.filters)
 
   if (!root) return
 
@@ -69,9 +69,6 @@ window.onload = function () {
   /* Event listeners initialization */
   onClickChangeFilter(menuItemList, ProjectItem)
 
-  // const projectList = document?.querySelectorAll('.project-item-wrapper')
-
-  // TODO: Re-initialize after menu switch
   onClickProjectToggle()
 }
 
