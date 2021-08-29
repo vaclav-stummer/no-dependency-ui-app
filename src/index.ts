@@ -59,6 +59,4 @@ window.onload = function () {
   dnd()
 }
 
-console.log('getState', localStorage.filters)
-
 console.info('App started.')

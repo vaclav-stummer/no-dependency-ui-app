@@ -54,7 +54,7 @@ export const populateProjects = ({
 
     const ProjectItemWithContent = ProjectItem
       // TODO: [Nice to have] Abstraction candidate => make util function
-      .replace('{{id}}', `${projects[i].id}`)
+      .replaceAll('{{id}}', `${projects[i].id}`)
       .replace('{{name}}', `${projects[i].name}`)
       .replaceAll('{{selected}}', `${projects[i].selected ? 'selected' : ''}`)
 
