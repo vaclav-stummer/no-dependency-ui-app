@@ -1,5 +1,20 @@
 import { handleDragAndToFolder } from '../../components/Projects/utils'
 
+const isSelected = (classList: DOMTokenList) =>
+  Array.from(classList).some((className) => className === 'selected')
+
+const toggleSelected = (condition: boolean, element: HTMLElement) => {
+  if (condition) {
+    element.classList.add('selected')
+    const checkboxElement = element.getElementsByTagName('input')[0]
+    checkboxElement.classList.add('selected')
+  } else {
+    element.classList.remove('selected')
+    const checkboxElement = element.getElementsByTagName('input')[0]
+    checkboxElement.classList.remove('selected')
+  }
+}
+
 export const dnd = (): void => {
   // TODO: [Nice to have]: Enhance types
   let dragSrcEl: HTMLElement | null = null
@@ -45,9 +60,20 @@ export const dnd = (): void => {
       return false
     }
 
+    /* Is not the same element */
     if (dragSrcEl && dragSrcEl !== this) {
+      const isThisElementSelected = isSelected(
+        this.getElementsByTagName('input')[0].classList,
+      )
+      const isDraggedElementSelected = isSelected(dragSrcEl.classList)
+
       dragSrcEl.innerHTML = this.innerHTML
+
+      toggleSelected(isThisElementSelected, dragSrcEl)
+
       this.innerHTML = event.dataTransfer.getData('text/html')
+
+      toggleSelected(isDraggedElementSelected, this)
     }
 
     return false

@@ -4,7 +4,7 @@ import { setState, StateKeys, Folder } from '../../libraries/stateManager'
 import {
   populateProjects,
   onClickProjectToggle,
-  unselectProject,
+  unselectProjects,
 } from '../Projects/utils'
 
 export const populateLeftSideMenu = (): void => {
@@ -40,7 +40,8 @@ export const onClickChangeFilter = (): void => {
     menuItem.addEventListener('click', function () {
       setState(StateKeys.Filters, this.id)
       pickFilter(this.id)
-      unselectProject()
+      unselectProjects()
+
 
       const folders: Folder[] = JSON.parse(localStorage.folders)
 

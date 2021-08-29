@@ -239,7 +239,7 @@ export const handleDragAndToFolder = (targetedFolderId: string): void => {
   })
 }
 
-export const unselectProject = (): void => {
+export const unselectProjects = (): void => {
   const folders: Folder[] = JSON.parse(localStorage.folders)
 
   const unselectedProjects = folders.map((folder) => ({
