@@ -33,7 +33,6 @@ export const populateProjects = ({
   }
 
   dnd()
-  onClickProjectToggle()
 }
 
 export const unPopulateProjects = (): // templateElementString: string,

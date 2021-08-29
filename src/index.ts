@@ -46,6 +46,7 @@ window.onload = function () {
   populateLeftSideMenu(initialState.folders, MenuItem)
 
   content?.insertAdjacentHTML('beforeend', Projects)
+  // TODO: Move "allStackedFiles" within "populateProjects"
   const allStackedFiles = initialState.folders.reduce(
     (stackedFiles, folder) => {
       return [...stackedFiles, ...folder.projects]

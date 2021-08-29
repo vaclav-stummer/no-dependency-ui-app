@@ -4,7 +4,7 @@ import {
   Folder,
   Project,
 } from '../../libraries/stateManager'
-import { populateProjects } from '../Projects/utils'
+import { populateProjects, onClickProjectToggle } from '../Projects/utils'
 
 export const populateLeftSideMenu = (
   items: Folder[],
@@ -54,6 +54,7 @@ export const onClickChangeFilter = (
           templateElementString: projectItemElementString,
           shouldCleanup: true,
         })
+        onClickProjectToggle()
       } else {
         const folder = folders.find((folder) => this.id === folder.id)
 
@@ -62,6 +63,7 @@ export const onClickChangeFilter = (
           templateElementString: projectItemElementString,
           shouldCleanup: true,
         })
+        onClickProjectToggle()
       }
     })
   })
