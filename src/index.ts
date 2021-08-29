@@ -47,15 +47,17 @@ window.onload = function () {
   populateProjects({
     folders: foldersData,
     shouldCleanup: true,
+    shouldReinitialize: false,
   })
 
   /* Libraries initialization */
   // Libraries needs to initialized after elements population
-  dnd()
 
   /* Event listeners initialization */
   onClickChangeFilter()
   onClickProjectToggle()
+
+  dnd()
 }
 
 console.log('getState', localStorage.filters)

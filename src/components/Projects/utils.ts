@@ -32,11 +32,13 @@ const getProjects = ({ isAll, folders, filter }: GetProjectsParams) => {
 interface PopulateProjectParams {
   folders: Folder[]
   shouldCleanup?: boolean
+  shouldReinitialize?: boolean
 }
 
 export const populateProjects = ({
   folders,
-  shouldCleanup,
+  shouldCleanup = true,
+  shouldReinitialize = true,
 }: PopulateProjectParams): void => {
   if (shouldCleanup) {
     unPopulateProjects()
@@ -58,7 +60,9 @@ export const populateProjects = ({
     projectsElement?.insertAdjacentHTML('beforeend', ProjectItemWithContent)
   }
 
-  dnd()
+  if (shouldReinitialize) {
+    dnd()
+  }
 }
 
 export const unPopulateProjects = (): void => {
