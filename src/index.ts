@@ -8,7 +8,7 @@ import LeftSideMenu from './components/LeftSideMenu/index.html'
 import Projects from './components/Projects/index.html'
 
 /* Utils */
-import { initializeState, Folder } from './libraries/stateManager'
+import { initializeState, initializeExportFolders, Folder } from './libraries/stateManager'
 import {
   populateLeftSideMenu,
   pickFilter,
@@ -21,9 +21,9 @@ import {
 
 import './styles/style.scss'
 
-const root = document?.getElementById('root')
-
 window.onload = function () {
+  const root = document?.getElementById('root')
+
   if (!root) return
 
   initializeState()
@@ -53,6 +53,7 @@ window.onload = function () {
   // Libraries needs to initialized after elements population
 
   /* Event listeners initialization */
+  initializeExportFolders()
   onClickChangeFilter()
   onClickProjectToggle()
 

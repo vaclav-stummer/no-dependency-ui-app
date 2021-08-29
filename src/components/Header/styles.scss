@@ -41,8 +41,13 @@
       @include placeholder-small();
     }
 
-    .menu {
-      @include placeholder-big();
+    .export-data-button {
+      .menu {
+        @include placeholder-big();
+
+        text-align: center;
+        line-height: 38px;
+      }
     }
   }
 }

@@ -70,3 +70,22 @@ export const initializeState = (): void => {
 
   if (!localStorage.folders) setState(StateKeys.Folders, initialState.folders)
 }
+
+const exportFolders = (): void => {
+  const folders: Folder[] = JSON.parse(localStorage.folders)
+  const normalizedFolders = folders.map(({ id, name, projects }) => ({
+    id,
+    name,
+    projects: projects.map(({ id, name }) => ({ id, name })),
+  }))
+
+  console.info(JSON.stringify(normalizedFolders))
+}
+
+export const initializeExportFolders = (): void => {
+  const exportButton = document?.querySelector('.export-data-button')
+
+  exportButton?.addEventListener('click', function () {
+    exportFolders()
+  })
+}
