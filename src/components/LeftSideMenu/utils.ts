@@ -1,29 +1,25 @@
-import {
-  setState,
-  StateKeys,
-  Folder,
-  Project,
-} from '../../libraries/stateManager'
+import MenuItem from '../LeftSideMenu/components/MenuItem/index.html'
+
+import { setState, StateKeys, Folder } from '../../libraries/stateManager'
 import { populateProjects, onClickProjectToggle } from '../Projects/utils'
 
-export const populateLeftSideMenu = (
-  items: Folder[],
-  templateElementString: string,
-): void => {
-  for (let i = 0; i < items.length; i++) {
+export const populateLeftSideMenu = (): void => {
+  const folders: Folder[] = JSON.parse(localStorage.folders)
+
+  for (let i = 0; i < folders.length; i++) {
     const menuElement = document?.querySelector('.left-side-menu-inner-wrapper')
-    const MenuItemWithContent = templateElementString
-      .replace('{{id}}', `left-side-menu-item-${i + 1}`)
-      .replace('{{label}}', `Folder ${i + 1}`)
+    const MenuItemWithContent = MenuItem.replace(
+      '{{id}}',
+      `left-side-menu-item-${i + 1}`,
+    ).replace('{{label}}', `Folder ${i + 1}`)
 
     menuElement?.insertAdjacentHTML('beforeend', MenuItemWithContent)
   }
 }
 
-export const pickFilter = (
-  menuItemList: NodeListOf<Element>,
-  filters: string,
-): void => {
+export const pickFilter = (filters: string): void => {
+  const menuItemList = document?.querySelectorAll('.left-side-menu-item') || []
+
   Array.from(menuItemList || []).forEach((element) => {
     if (filters === element?.id) {
       element.classList.add('active')
@@ -33,25 +29,19 @@ export const pickFilter = (
   })
 }
 
-export const onClickChangeFilter = (
-  menuItemList: NodeListOf<Element>,
-  projectItemElementString: string,
-): void => {
+export const onClickChangeFilter = (): void => {
+  const menuItemList = document?.querySelectorAll('.left-side-menu-item')
+
   menuItemList.forEach(function (menuItem) {
     menuItem.addEventListener('click', function () {
       setState(StateKeys.Filters, this.id)
-      pickFilter(menuItemList, this.id)
+      pickFilter(this.id)
 
       const folders: Folder[] = JSON.parse(localStorage.folders)
 
       if (this.id === 'left-side-menu-item-all') {
-        const allStackedFiles = folders.reduce((stackedFiles, folder) => {
-          return [...stackedFiles, ...folder.projects]
-        }, [] as Project[])
-
         populateProjects({
-          items: allStackedFiles,
-          templateElementString: projectItemElementString,
+          folders,
           shouldCleanup: true,
         })
         onClickProjectToggle()
@@ -59,8 +49,7 @@ export const onClickChangeFilter = (
         const folder = folders.find((folder) => this.id === folder.id)
 
         populateProjects({
-          items: folder?.projects || [],
-          templateElementString: projectItemElementString,
+          folders: folder ? [folder] : [],
           shouldCleanup: true,
         })
         onClickProjectToggle()

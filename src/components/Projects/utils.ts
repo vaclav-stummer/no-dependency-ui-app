@@ -1,5 +1,4 @@
 import { dnd } from '../../libraries/dragAndDrop'
-
 import {
   setState,
   Project,
@@ -7,29 +6,36 @@ import {
   StateKeys,
 } from '../../libraries/stateManager'
 
+import  ProjectItem  from '../Projects/components/ProjectItem/index.html'
+
 interface PopulateProjectParams {
-  items: Project[]
-  templateElementString: string
+  folders: Folder[]
   shouldCleanup?: boolean
 }
 
 export const populateProjects = ({
-  items,
-  templateElementString,
+  folders,
   shouldCleanup,
 }: PopulateProjectParams): void => {
   if (shouldCleanup) {
     unPopulateProjects()
   }
 
-  for (let i = 0; i < items.length; i++) {
+  const allStackedProjects = folders.reduce((stackedFiles, folder) => {
+    return [...stackedFiles, ...folder.projects]
+  }, [] as Project[])
+
+  for (let i = 0; i < allStackedProjects.length; i++) {
     const projectsElement = document?.querySelector('.projects-inner-wrapper')
 
-    const ProjectItemWithContent = templateElementString
+    const ProjectItemWithContent = ProjectItem
       // TODO: [Nice to have] Abstraction candidate => make util function
       .replace('{{id}}', `project-${i + 1}`)
       .replace('{{name}}', `${i + 1}`)
-      .replaceAll('{{selected}}', `${items[i].selected ? 'selected' : ''}`)
+      .replaceAll(
+        '{{selected}}',
+        `${allStackedProjects[i].selected ? 'selected' : ''}`,
+      )
 
     projectsElement?.insertAdjacentHTML('beforeend', ProjectItemWithContent)
   }

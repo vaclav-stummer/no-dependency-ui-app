@@ -3,7 +3,7 @@ export const dnd = (): void => {
   let dragSrcEl: HTMLElement | null = null
 
   function handleDragStart(event: any) {
-    this.style.opacity = '0.4'
+    this.style.opacity = '0.1'
 
     dragSrcEl = this
 

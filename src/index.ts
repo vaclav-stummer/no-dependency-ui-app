@@ -5,12 +5,10 @@ import { dnd } from './libraries/dragAndDrop'
 // TODO: [Nice to have] find out how to click trough to the exact .html file
 import Header from './components/Header/index.html'
 import LeftSideMenu from './components/LeftSideMenu/index.html'
-import MenuItem from './components/LeftSideMenu/components/MenuItem/index.html'
 import Projects from './components/Projects/index.html'
-import ProjectItem from './components/Projects/components/ProjectItem/index.html'
 
 /* Utils */
-import { initializeState, Project, Folder } from './libraries/stateManager'
+import { initializeState, Folder } from './libraries/stateManager'
 import {
   populateLeftSideMenu,
   pickFilter,
@@ -40,22 +38,14 @@ window.onload = function () {
   const foldersData: Folder[] = JSON.parse(localStorage.folders)
 
   content?.insertAdjacentHTML('beforeend', LeftSideMenu)
-  populateLeftSideMenu(foldersData, MenuItem)
+  populateLeftSideMenu()
 
   content?.insertAdjacentHTML('beforeend', Projects)
 
-  const menuItemList = document?.querySelectorAll('.left-side-menu-item')
-
-  pickFilter(menuItemList, filtersData)
-
-  // TODO: Move "allStackedFiles" within "populateProjects"
-  const allStackedFiles = foldersData.reduce((stackedFiles, folder) => {
-    return [...stackedFiles, ...folder.projects]
-  }, [] as Project[])
+  pickFilter(filtersData)
 
   populateProjects({
-    items: allStackedFiles,
-    templateElementString: ProjectItem,
+    folders: foldersData,
   })
 
   /* Libraries initialization */
@@ -63,8 +53,7 @@ window.onload = function () {
   dnd()
 
   /* Event listeners initialization */
-  onClickChangeFilter(menuItemList, ProjectItem)
-
+  onClickChangeFilter()
   onClickProjectToggle()
 }
 
