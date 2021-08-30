@@ -27,7 +27,7 @@
     "dev": "npm run node-engine-check && webpack-dev-server --mode=development",
     "build": "webpack --mode=production",
     "dev:preffiled": "node src/scripts/prefillData.js && npm run node-engine-check && webpack-dev-server --mode=development",
-    "test": "npm run node-engine-check && echo \"Error: no test specified\" && exit 1"
+    "test:unit": "jest"
   },
   "devDependencies": {
     "@shopify/eslint-plugin": "^40.4.0",
@@ -41,6 +41,7 @@
     "file-loader": "^6.2.0",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
+    "jest": "^27.1.0",
     "prettier": "^2.3.2",
     "prompts": "^2.4.1",
     "sass": "^1.38.0",
