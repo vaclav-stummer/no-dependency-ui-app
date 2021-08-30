@@ -12,8 +12,10 @@
 - `prettier:format` - formats code
 - `lint` - linter check
 - `lint:fix` - fixes fixable linter issues
+- `type-check` - type check
 - `dev` - starts local development server (*webpack-dev-server*) with hot reloading in development mode
 - `build` - builds production build
+- `dev:preffiled` - starts local development server with prefilled data
 
 ## Development dependencies
 - `check-engine` - checks and validate `Node` and `npm` versions which are run with project
