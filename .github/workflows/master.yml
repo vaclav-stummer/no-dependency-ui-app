@@ -26,8 +26,11 @@ jobs:
       - name: Linter check
         run: npm run lint:fix
 
-      - name: Unit it.skip('should feature', () => {});
+      - name: Unit tests
         run: npm run test:unit
+
+      - name: Generate type docs
+        run: npm run type-doc:generate
 
       - name: Build app
         run: npm run build
