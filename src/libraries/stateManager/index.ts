@@ -65,10 +65,47 @@ export const setState = <T>(key: string, payload: T): void => {
   localStorage.setItem(key, JSON.stringify(payload))
 }
 
-export const initializeState = (): void => {
-  if (!localStorage.filters) setState(StateKeys.Filters, initialState.filters)
+const getFolderFromTemplate = (index: number) => ({
+  id: `left-side-menu-item-${index + 1}`,
+  name: `Folder ${index + 1}`,
+  projects: [],
+  sortedProjectsIds: [],
+})
 
-  if (!localStorage.folders) setState(StateKeys.Folders, initialState.folders)
+const getProjectFromTemplate = (index: number) => ({
+  id: `project-${index + 1}`,
+  name: `${index + 1}`,
+  selected: false,
+})
+
+interface InitializeStateParams {
+  foldersAmount: number
+  projectsAmount: number
+}
+
+export const initializeState = ({
+  foldersAmount,
+  projectsAmount,
+}: InitializeStateParams): void => {
+  const folders: Folder[] = []
+
+  for (let i = 0; i < foldersAmount; i++) {
+    const folder = getFolderFromTemplate(i)
+    folders.push(folder)
+  }
+
+  const projects: Project[] = []
+
+  for (let i = 0; i < projectsAmount; i++) {
+    const project = getProjectFromTemplate(i)
+    projects.push(project)
+  }
+
+  const firstFolder = folders.shift() as unknown as Folder
+  folders.unshift({ ...firstFolder, projects })
+
+  setState(StateKeys.Filters, initialState.filters)
+  setState(StateKeys.Folders, folders ?? initialState.filters)
 }
 
 const exportFolders = (): void => {

@@ -16,8 +16,11 @@
     "strictPropertyInitialization": true,
     "checkJs": true,
     "rootDir": "src",
-    "sourceMap": true
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "src/scripts/example.ts"],
   "exclude": ["node_modules"]
 }

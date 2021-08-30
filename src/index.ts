@@ -8,7 +8,11 @@ import LeftSideMenu from './components/LeftSideMenu/index.html'
 import Projects from './components/Projects/index.html'
 
 /* Utils */
-import { initializeState, initializeExportFolders, Folder } from './libraries/stateManager'
+import {
+  initializeState,
+  initializeExportFolders,
+  Folder,
+} from './libraries/stateManager'
 import {
   populateLeftSideMenu,
   pickFilter,
@@ -19,6 +23,8 @@ import {
   onClickProjectToggle,
 } from './components/Projects/utils'
 
+import data from './preffiledData.json'
+
 import './styles/style.scss'
 
 window.onload = function () {
@@ -26,7 +32,10 @@ window.onload = function () {
 
   if (!root) return
 
-  initializeState()
+  initializeState({
+    foldersAmount: data.foldersCount,
+    projectsAmount: data.projectsCount,
+  })
 
   /* Load components to DOM */
   // Don't addEventListeners here
